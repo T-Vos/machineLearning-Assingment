@@ -97,15 +97,15 @@ def get_titleLen(data):
     return data
 
 def get_AuthorsLen(data):
-    data["authors"] = data.apply(lambda x:len(x["authors"]),axis=1)
+    data["authors_len"] = data.apply(lambda x:len(x["authors"]),axis=1)
     return data
 
 def get_TopicsLen(data):
-    data["topics"] = data.apply(lambda x:len(x["topics"]),axis=1)
+    data["topics_len"] = data.apply(lambda x:len(x["topics"]),axis=1)
     return data
 
 def get_FieldsOfStudyLen(data):
-    data["fields_of_study"] = data.apply(lambda x:len(x["fields_of_study"]),axis=1)
+    data["fields_of_study_len"] = data.apply(lambda x:len(x["fields_of_study"]),axis=1)
     return data
 
 def find_venue_in_dataFrame(venue, venues_dict):
@@ -176,7 +176,6 @@ def model():
     # return cross_val_score(model, X, y, cv=10)
     # cross_val_score(model, X, y, cv=10)
     # return cross_val_score(model, X, y, cv=10)
-
 model()
 
 
