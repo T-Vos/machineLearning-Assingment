@@ -1,0 +1,7 @@
+# Don't want to share research
+./articles
+.articles/
+articles/
+# unwanted files
+*.pdf
+*.png
