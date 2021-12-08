@@ -2,7 +2,18 @@ import numpy as np
 import pandas as pd
 import json
 from sklearn.model_selection import train_test_split
- 
+from sklearn import metrics
+from sklearn.model_selection import train_test_split
+from sklearn.model_selection import cross_val_score
+from sklearn.preprocessing import StandardScaler
+import numpy as np
+from sklearn.linear_model import SGDRegressor
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn import linear_model
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.datasets import make_regression
+
 def open_json_data(fileLocation = 'train-1.json'):
     # Opening JSON file
     openFile = open(fileLocation)
@@ -65,9 +76,6 @@ def fill_Nan(data):
     data["title"] = data["title"].fillna("")
     return data
 
-
-from sklearn import metrics
-
 def eval(predicted, y_test):
     ## Kpi
     print("R2 (explained variance):", round(metrics.r2_score(y_test, predicted), 2))
@@ -84,20 +92,14 @@ def eval(predicted, y_test):
     print("Max Error:", "{:,.0f}".format(max_error))
     return(residuals,max_error,max_idx)
 
-
-
 def get_titleLen(data):
     data["title_len"] = data.apply(lambda x:len(x["title"]),axis=1)
     return data
 
-
-# %%
 def get_AuthorsLen(data):
     data["authors"] = data.apply(lambda x:len(x["authors"]),axis=1)
     return data
 
-
-# %%
 def get_TopicsLen(data):
     data["topics"] = data.apply(lambda x:len(x["topics"]),axis=1)
     return data
@@ -116,8 +118,6 @@ def get_venue(data):
     data["venue_cat"] = data.apply(lambda x:find_venue_in_dataFrame(x.venue, venue_dictionary),axis=1)
     return data
 
-import numpy as np
-import json
 def score(Y_true, Y_pred):
     y_true = np.log1p(np.maximum(0, Y_true))
     y_pred = np.log1p(np.maximum(0, Y_pred))
@@ -130,19 +130,7 @@ def evaluate(gold_path, pred_path):
     y_pred = np.array([ pred[key] for key in gold ])
     return score(y_true, y_pred)
 
-from sklearn.model_selection import train_test_split
-from sklearn.model_selection import cross_val_score
-from sklearn.preprocessing import StandardScaler
-import numpy as np
-from sklearn.linear_model import SGDRegressor
-from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import StandardScaler
-from sklearn import linear_model
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.datasets import make_regression
-
 def model():
-    
     data = open_json_data()
     data = fill_Nan(data)
 
