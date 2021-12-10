@@ -2,6 +2,9 @@
 ./articles
 .articles/
 articles/
+backup/
+.backup/
+./backup
 # unwanted files
 *.pdf
 *.png
